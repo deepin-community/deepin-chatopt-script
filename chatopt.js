@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Deepin ChatOpt
-// @namespace    https://myml.dev/
+// @namespace    https://github.com/deepin-community
 // @version      0.1
 // @description  Add Deepin ChatOpt command to github pull request page
-// @author       myml
+// @author       wurongjie@deepin.org
 // @match        https://github.com/linuxdeepin/**
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=github.com
 // @grant        none
@@ -62,5 +62,4 @@
             group.appendChild(checkBtn);
         })
     }, 1000)
-    // Your code here...
 })();
