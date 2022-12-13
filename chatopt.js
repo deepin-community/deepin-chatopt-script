@@ -5,12 +5,37 @@
 // @description  Add Deepin ChatOpt command to github pull request page
 // @author       wurongjie@deepin.org
 // @match        https://github.com/linuxdeepin/**
+// @match        https://github.com/deepin-community/**
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=github.com
 // @grant        none
 // ==/UserScript==
 
 (function() {
     'use strict';
+    var observer = new MutationObserver(async() => {
+        const pop = Array.from(document.querySelectorAll(".Popover")).filter(pop=>pop.childElementCount)[0]
+        if(pop.style.display == 'none'){
+            return
+        }
+        if(pop.querySelector(".uniontech-job-number")){
+            return
+        }
+        const nameEl = Array.from(pop.querySelectorAll("section")).filter(el=>el.getAttribute('aria-label')==='user login and name')[0]
+        if(!nameEl){
+            return
+        }
+        const username = nameEl.querySelector("a").getAttribute("href").slice(1)
+        const resp = await fetch("https://www-pre.deepin.org/githubid/user/by/github_username/"+ username)
+        const info = await resp.json()
+        console.log("username",username,info)
+        const jobEl = document.createElement("section")
+        jobEl.classList="uniontech-job-number"
+        const email = `<a href='mailto://${info['uniontech_username']}@uniontech.com'>${info['uniontech_username']}</a>`
+        jobEl.innerHTML=`<strong>${info['uniontech_id'].toUpperCase()}</strong> <span>${info['uniontech_nickname']}</span> ` + email
+        nameEl.parentNode.insertBefore(jobEl, nameEl.nextSibling)
+    });
+    observer.observe(document.body, {subtree: true, childList: true});
+
     let i = 0
     const interval = setInterval(()=>{
         console.log("try append deepin action group")
