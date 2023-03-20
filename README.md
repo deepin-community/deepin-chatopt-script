@@ -4,8 +4,10 @@
 
 ## 安装
 
-    在浏览器安装tampermonkey插件
-    在tampermonkey插件打开管理面板 - 实用工具，找到“从 URL 安装”，输入 https://raw.githubusercontent.com/deepin-community/deepin-chatopt-script/main/chatopt.js
+1. 在浏览器安装tampermonkey插件
+2. 安装脚本
+    * 直接访问 [chatopt.user.js](https://raw.githubusercontent.com/deepin-community/deepin-chatopt-script/main/chatopt.user.js) 自动跳转到安装界面
+    * 或在tampermonkey插件打开管理面板 - 实用工具，找到“从 URL 安装”，输入 https://raw.githubusercontent.com/deepin-community/deepin-chatopt-script/main/chatopt.user.js
 
 ## 功能
 
