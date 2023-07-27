@@ -125,18 +125,6 @@
         title: "添加标签",
         no_submit: true,
       },
-      {
-        name: "enhancement",
-        input: "/label enhancement",
-        title: "标记是新功能或请求",
-        no_submit: true,
-      },
-      {
-        name: "bug",
-        input: "/label bug",
-        title: "标记是一个BUG",
-        no_submit: true,
-      },
     ];
     for (let command of commands) {
       // 添加 /merge 指令按钮
