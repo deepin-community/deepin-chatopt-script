@@ -98,7 +98,7 @@
       el.append(uniontechName);
     }
   }
-  // 添加指令按钮，包括 merge check integrate
+  // 添加指令按钮，包括 approve integrate assign等
   function addCommandBtn() {
     if (document.querySelector(".deepin-action-group")) {
       return;
@@ -109,14 +109,20 @@
     }
     const group = document.createElement("div");
     const commands = [
-      { name: "merge", input: "/merge", title: "合并这个提交" },
       { name: "approve", input: "/approve", title: "允许合并这个提交" },
       { name: "integrate", input: "/integrate", title: "发起仓库集成" },
       { name: "lgtm", input: "/lgtm", title: "看起来还不错+1" },
+      { name: "cc", input: "/cc @", title: "请求review", no_submit: true },
       {
         name: "assign",
         input: "/assign @",
         title: "分配给某人",
+        no_submit: true,
+      },
+      {
+        name: "review",
+        input: "/review @",
+        title: "请求review",
         no_submit: true,
       },
       {
@@ -127,7 +133,7 @@
       },
     ];
     for (let command of commands) {
-      // 添加 /merge 指令按钮
+      // 添加指令按钮
       const btn = document.createElement("button");
       btn.type = "button";
       btn.textContent = command.name;
@@ -135,9 +141,11 @@
       btn.title = command.title;
       btn.addEventListener("click", () => {
         const edit = document.querySelector("#new_comment_field");
-        edit.value = command.input + " " + edit.value;
-        edit.focus();
-        if (!command.no_submit) {
+        if (command.no_submit) {
+          edit.focus();
+          edit.value = command.input + " " + edit.value;
+        } else {
+          edit.value = command.input;
           document.querySelector(".js-new-comment-form").submit();
           document.querySelector("#new_comment_field").value = "";
         }
