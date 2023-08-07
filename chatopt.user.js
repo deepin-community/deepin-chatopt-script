@@ -155,7 +155,7 @@
 
     group.classList = "deepin-action-group";
     group.style =
-      "float: left;display: flex;flex-wrap: wrap;grid-gap: 0.5rem;max-width: 600px;";
+      "float: left;display: flex;flex-wrap: wrap;grid-gap: 0.5rem;max-width: 500px;";
     const firstChild = actions.firstChild;
     actions.insertBefore(group, firstChild);
   }
