@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Deepin ChatOpt
 // @namespace    https://github.com/deepin-community
-// @version      0.1
+// @version      0.2
 // @description  Add Deepin ChatOpt command to github pull request page
 // @author       wurongjie@deepin.org
 // @match        https://github.com/linuxdeepin/**
