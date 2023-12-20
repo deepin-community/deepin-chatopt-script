@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name         Deepin ChatOpt
 // @namespace    https://github.com/deepin-community
-// @version      0.2
+// @version      0.3
 // @description  Add Deepin ChatOpt command to github pull request page
 // @author       wurongjie@deepin.org
 // @match        https://github.com/linuxdeepin/**
 // @match        https://github.com/deepin-community/**
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=github.com
-// @grant        none
+// @grant        GM.xmlHttpRequest
+// @connect      www-pre.deepin.org
 // ==/UserScript==
 
 (function () {
@@ -17,10 +18,10 @@
   // 获取员工信息
   function getUniontechInfo(username) {
     if (!uniontechInfoCache[username]) {
-      uniontechInfoCache[username] = fetch(
-        "https://www-pre.deepin.org/githubid/user/by/github_username/" +
-          username
-      ).then((resp) => resp.json());
+      uniontechInfoCache[username] = GM.xmlHttpRequest({
+        url: `https://www-pre.deepin.org/githubid/user/by/github_username/${username}`,
+        fetch: true
+      }).then((resp) => JSON.parse(resp.responseText));
     }
     return uniontechInfoCache[username];
   }
