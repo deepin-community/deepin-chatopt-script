@@ -170,6 +170,7 @@
       if (running) {
         return;
       }
+      running = true;
       Promise.all([addUniontechName(), addUniontechName2(), addUniontechInfo(), addCommandBtn()]).then(()=>{running = false});
     }, 500);
   });
