@@ -100,7 +100,7 @@
     }
   }
   // 添加指令按钮，包括 approve integrate assign等
-  function addCommandBtn() {
+  async function addCommandBtn() {
     if (document.querySelector(".deepin-action-group")) {
       return;
     }
@@ -160,15 +160,17 @@
     const firstChild = actions.firstChild;
     actions.insertBefore(group, firstChild);
   }
+  let running = false;
   let observerInterval = 0;
   let observer = new MutationObserver(() => {
     // 500ms 防抖
     clearInterval(observerInterval);
     observerInterval = setTimeout(() => {
-      addUniontechName();
-      addUniontechName2();
-      addUniontechInfo();
-      addCommandBtn();
+      // 避免重复运行
+      if (running) {
+        return;
+      }
+      Promise.all([addUniontechName(), addUniontechName2(), addUniontechInfo(), addCommandBtn()]).then(()=>{running = false});
     }, 500);
   });
   observer.observe(document.body, { subtree: true, childList: true });
