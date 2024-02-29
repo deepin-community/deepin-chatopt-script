@@ -110,6 +110,7 @@
     }
     const group = document.createElement("div");
     const commands = [
+      { name: "merge", input: "/merge", title: "合并这个提交" },
       { name: "approve", input: "/approve", title: "允许合并这个提交" },
       { name: "integrate", input: "/integrate", title: "发起仓库集成" },
       { name: "lgtm", input: "/lgtm", title: "看起来还不错+1" },
